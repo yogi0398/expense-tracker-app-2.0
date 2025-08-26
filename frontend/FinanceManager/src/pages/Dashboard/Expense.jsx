@@ -6,9 +6,10 @@ import axiosInstance from '../../Utils/axiosInstance';
 import ExpenseOverview from '../../components/Expense/ExpenseOverview';
 import Modal from '../../components/Modal';
 import AddExpenseForm from '../../components/Expense/AddExpenseForm';
-import toast from 'react-hot-toast';
+import toast, { LoaderIcon } from 'react-hot-toast';
 import ExpenseList from '../../components/Expense/ExpenseList';
 import DeleteAlert from '../../components/DeleteAlert';
+import Loading from '../../components/layouts/Loading';
 
 const Expense = () => {
 
@@ -104,8 +105,8 @@ const Expense = () => {
   };
 
   //handle download expense details
-  const handleDownloadExpenseDetails = async () => { 
-    try{
+  const handleDownloadExpenseDetails = async () => {
+    try {
       const response = await axiosInstance.get(
         API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,
         {
@@ -124,7 +125,7 @@ const Expense = () => {
       link.parentNode.removeChild(link)
       window.URL.revokeObjectURL(url);
     }
-    catch(error){
+    catch (error) {
       console.error("Error downloading expense details: ", error);
       toast.error("Failed to download expense details. Please try again.")
     }
@@ -139,7 +140,7 @@ const Expense = () => {
 
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className='my-5 mx-auto'>
+      {loading ? <Loading /> : (<div className='my-5 mx-auto'>
         <div className="grid grid-cols-1 gap-6">
           <div className="">
             <ExpenseOverview
@@ -166,15 +167,17 @@ const Expense = () => {
 
         <Modal
           isOpen={openDeleteAlert.show}
-          onClose={() => setOpenDeleteALert({show: false, data: null})}
+          onClose={() => setOpenDeleteALert({ show: false, data: null })}
           title="Delete Expense"
         >
-          <DeleteAlert 
+          <DeleteAlert
             content="Are you sure you want to delete this expense detail?"
             onDelete={() => deleteExpense(openDeleteAlert.data)}
           />
         </Modal>
       </div>
+      )}
+
     </DashboardLayout>
   )
 }
