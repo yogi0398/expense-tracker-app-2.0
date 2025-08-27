@@ -3,13 +3,13 @@ import { LuArrowRight } from 'react-icons/lu'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import moment from 'moment'
 
-const RecentIncome = ({transactions, onSeeMore}) => {
+const RecentIncome = ({transactions, onSeeMore, theme}) => {
   return (
-    <div className='card'>
+    <div className={`${theme == "dark" ? "card-dark" : "card"}`}>
         <div className="flex items-center justify-between">
-            <h5 className="text-lg">Income</h5>
+            <h5 className={`text-lg ${theme == "dark" ? "text-white" : ""}`}>Income</h5>
 
-            <button className="card-btn" onClick={onSeeMore}>
+            <button className={`${theme === "dark" ? "card-btn-dark" : "card-btn"}`} onClick={onSeeMore}>
                 See All <LuArrowRight className='text-base' />
             </button>
         </div>
@@ -24,6 +24,7 @@ const RecentIncome = ({transactions, onSeeMore}) => {
                     amount = {item.amount}
                     type = "Income"
                     hideDeleteBtn
+                    theme={theme}
                 />
             ))}
         </div>

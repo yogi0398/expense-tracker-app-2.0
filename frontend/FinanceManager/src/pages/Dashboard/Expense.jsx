@@ -11,9 +11,11 @@ import ExpenseList from '../../components/Expense/ExpenseList';
 import DeleteAlert from '../../components/DeleteAlert';
 import Loading from '../../components/layouts/Loading';
 
-const Expense = () => {
+const Expense = ({theme, onToggle}) => {
 
   useUserAuth();
+
+  // const theme = "dark";
 
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -139,13 +141,14 @@ const Expense = () => {
   }, []);
 
   return (
-    <DashboardLayout activeMenu="Expense">
+    <DashboardLayout activeMenu="Expense" theme={theme} onToggle={onToggle}>
       {loading ? <Loading /> : (<div className='my-5 mx-auto'>
         <div className="grid grid-cols-1 gap-6">
           <div className="">
             <ExpenseOverview
               transactions={expenseData}
               onAddExpense={() => setOpenAddExpenseModal(true)}
+              theme = {theme}
             />
           </div>
           <ExpenseList
@@ -154,6 +157,7 @@ const Expense = () => {
               setOpenDeleteALert({ show: true, data: id });
             }}
             onDownload={handleDownloadExpenseDetails}
+            theme = {theme}
           />
         </div>
 
@@ -161,8 +165,9 @@ const Expense = () => {
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
           title="Add Expense"
+          theme = {theme}
         >
-          <AddExpenseForm onAddExpense={handleAddExpense} />
+          <AddExpenseForm onAddExpense={handleAddExpense} theme = {theme}/>
         </Modal>
 
         <Modal

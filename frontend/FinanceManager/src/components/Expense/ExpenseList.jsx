@@ -3,13 +3,13 @@ import { LuDownload } from 'react-icons/lu'
 import TransactionInfoCard from '../Cards/TransactionInfoCard'
 import moment from 'moment'
 
-const ExpenseList = ({transactions, onDelete, onDownload}) => {
+const ExpenseList = ({transactions, onDelete, onDownload, theme}) => {
   return (
-    <div className='card'>
+    <div className={`${theme === "dark" ? "card-dark" : "card"}`}>
         <div className="flex items-center justify-between">
-            <h5 className='text-lg'>All Expenses</h5>
+            <h5 className={`text-lg ${theme == "dark" ? "text-white" : ""}`}>All Expenses</h5>
 
-            <button className="card-btn" onClick={onDownload}>
+            <button className={`${theme === "dark" ? "card-btn-dark" : "card-btn"}`} onClick={onDownload}>
                 <LuDownload className='text-base' />
                 Download
             </button>
@@ -25,6 +25,7 @@ const ExpenseList = ({transactions, onDelete, onDownload}) => {
                     amount = {expense.amount}
                     type = "Expense"
                     onDelete = {() => onDelete(expense._id)}
+                    theme = {theme}
                 /> 
             ))}
         </div>

@@ -11,9 +11,11 @@ import IncomeList from '../../components/Income/IncomeList';
 import DeleteAlert from '../../components/DeleteAlert';
 import Loading from '../../components/layouts/Loading';
 
-const Income = () => {
+const Income = ({theme, onToggle}) => {
 
   useUserAuth();
+
+  // const theme = "dark";
 
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -139,13 +141,14 @@ const Income = () => {
 
 
   return (
-    <DashboardLayout activeMenu="Income">
+    <DashboardLayout activeMenu="Income" theme = {theme} onToggle={onToggle}>
       {loading ? <Loading /> : (<div className='my-5 mx-auto'>
         <div className="grid grif-cols-1 gap-6">
           <div className="">
             <IncomeOverview
               transactions={incomeData}
               onAddIncome={() => setOpenAddIncomeModal(true)}
+              theme = {theme}
             />
           </div>
 
@@ -155,6 +158,7 @@ const Income = () => {
               setOpenDeleteALert({ show: true, data: id });
             }}
             onDownload={handleDownloadIncomeDetails}
+            theme = {theme}
           />
         </div>
 
@@ -162,8 +166,9 @@ const Income = () => {
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
           title="Add Income"
+          theme = {theme}
         >
-          <AddIncomeForm onAddIncome={handleAddIncome} />
+          <AddIncomeForm onAddIncome={handleAddIncome} theme = {theme}/>
         </Modal>
 
         <Modal

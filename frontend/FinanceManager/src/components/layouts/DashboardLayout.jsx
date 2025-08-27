@@ -5,22 +5,22 @@ import Navbar from './Navbar';
 import SideMenu from './SideMenu';
 import Loading from './Loading';
 
-const DashboardLayout = ({children, activeMenu}) => {
+const DashboardLayout = ({children, activeMenu, theme, onToggle}) => {
 
     const {user} = useContext(UserContext);
-
+    // const theme = "dark";
   return (
     <div className=''>
-        <Navbar activeMenu = {activeMenu}/>
+        <Navbar activeMenu = {activeMenu} theme = {theme} onToggle = {onToggle}/>
 
         {user ? (
-            <div className='flex'>
+            <div className={`flex ${theme === "dark" ? "bg-black" : ""}`}>
                 <div className="max-[1080px]:hidden">
-                    <SideMenu activeMenu = {activeMenu} />
+                    <SideMenu activeMenu = {activeMenu} theme = {theme}/>
                 </div>
-                <div className="grow mx-5">{children}</div>
+                <div className={`grow mx-5 `}>{children}</div>
             </div>
-        ) : (<Loading />)}
+        ) : (<Loading theme = {theme}/>)}
     </div>
   )
 }

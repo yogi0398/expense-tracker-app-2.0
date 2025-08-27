@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import CustomTooltip from './CustomTooltip';
 
-const CustomBarChart = ({data}) => {
+const CustomBarChart = ({data, theme}) => {
 
     //Function to alternate colors
     const getBarColor = (index) => {
@@ -35,13 +35,13 @@ const CustomBarChart = ({data}) => {
     };
 
   return (
-    <div className='bg-white mt-6'>
+    <div className={`${theme === "dark" ? "bg-black" : "bg-white"} mt-6`}>
         <ResponsiveContainer width="100%" height={300}>
             <BarChart data={data}>
                 <CartesianGrid stroke="none" />
 
-                <XAxis dataKey="month" tick={{fontSize: 12, fill: "#555"}} stroke='none'/>
-                <YAxis tick={{fontSize: 12, fill: "#555"}} stroke="none" />
+                <XAxis dataKey="month" tick={{fontSize: 12, fill: `${theme === "dark" ? "#aaa" : "#555"}`}} stroke='none'/>
+                <YAxis tick={{fontSize: 12, fill: `${theme === "dark" ? "#aaa" : "#555"}`}} stroke="none" />
 
                 <Tooltip content={CustomToolTip} />
                 

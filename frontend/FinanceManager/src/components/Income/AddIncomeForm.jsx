@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Input from '../Inputs/Input';
 import EmojiPickerPopup from '../EmojiPickerPopup';
 
-const AddIncomeForm = ({onAddIncome}) => {
+const AddIncomeForm = ({onAddIncome, theme}) => {
 
     const [income, setIncome] = useState({
         source: "",
@@ -18,6 +18,7 @@ const AddIncomeForm = ({onAddIncome}) => {
         <EmojiPickerPopup 
             icon={income.icon}
             onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
+            theme = {theme}
         />
         <Input 
             value = {income.source}
@@ -25,6 +26,7 @@ const AddIncomeForm = ({onAddIncome}) => {
             label="Income Source"
             placholder="Freelance, Salary, Stock Profit etc"
             type="text"
+            theme={theme}
         />
 
         <Input 
@@ -33,6 +35,7 @@ const AddIncomeForm = ({onAddIncome}) => {
             label="Amount"
             placholder=""
             type="number"
+            theme={theme}
         />
 
         <Input 
@@ -41,12 +44,13 @@ const AddIncomeForm = ({onAddIncome}) => {
             label="Date"
             placholder=""
             type="date"
+            theme={theme}
         />
 
         <div className="flex justify-end mt-6">
             <button
                 type="button"
-                className='add-btn add-btn-fill'
+                className={`${theme === "dark" ? "add-btn-dark": "add-btn add-btn-fill"}`}
                 onClick={() => onAddIncome(income)}
             >
                 Add Income

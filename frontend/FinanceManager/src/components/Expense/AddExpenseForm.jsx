@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Input from '../Inputs/Input';
 import EmojiPickerPopup from '../EmojiPickerPopup';
 
-const AddExpenseForm = ({onAddExpense}) => {
+const AddExpenseForm = ({onAddExpense, theme}) => {
 
     const [expense, setExpense] = useState({
         category: "",
@@ -18,6 +18,7 @@ const AddExpenseForm = ({onAddExpense}) => {
         <EmojiPickerPopup 
             icon={expense.icon}
             onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
+            theme = {theme}
         />
         <Input 
             value = {expense.category}
@@ -25,6 +26,7 @@ const AddExpenseForm = ({onAddExpense}) => {
             label="Expense Category"
             placholder="Food, Trip, Grocery, Rent etc"
             type="text"
+            theme={theme}
         />
 
         <Input 
@@ -33,6 +35,7 @@ const AddExpenseForm = ({onAddExpense}) => {
             label="Amount"
             placholder=""
             type="number"
+            theme={theme}
         />
 
         <Input 
@@ -41,12 +44,13 @@ const AddExpenseForm = ({onAddExpense}) => {
             label="Date"
             placholder=""
             type="date"
+            theme={theme}
         />
 
         <div className="flex justify-end mt-6">
             <button
                 type="button"
-                className='add-btn add-btn-fill'
+                className={`${theme === "dark" ? "add-btn-dark": "add-btn add-btn-fill"}`}
                 onClick={() => onAddExpense(expense)}
             >
                 Add Expense

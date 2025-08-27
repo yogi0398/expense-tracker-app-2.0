@@ -3,7 +3,7 @@ import { LuPlus } from 'react-icons/lu';
 import { prepareExpenseLineChartData } from '../../Utils/helper';
 import CustomLineChart from '../Charts/CustomLineChart';
 
-const ExpenseOverview = ({ transactions, onAddExpense }) => {
+const ExpenseOverview = ({ transactions, onAddExpense, theme }) => {
 
     const [chartData, setChartData] = useState([]);
 
@@ -15,14 +15,14 @@ const ExpenseOverview = ({ transactions, onAddExpense }) => {
     }, [transactions]);
 
     return (
-        <div className='card'>
+        <div className={`${theme === "dark" ? "card-dark" : "card"}`}>
             <div className="flex items-center justify-between">
                 <div className="">
-                    <h5 className="text-lg">Expense Overview</h5>
+                    <h5 className={`text-lg ${theme == "dark" ? "text-white" : ""}`}>Expense Overview</h5>
                     <p className="text-xs text-gray-400 mt-0.5">Track your spending trends over time and gain insights into where your money goes.</p>
                 </div>
 
-                <button className="add-btn" onClick={onAddExpense}>
+                <button className={`${theme === "dark" ? "add-btn-dark" : "add-btn"}`} onClick={onAddExpense}>
                     <LuPlus className='text-lg' />
                     Add Expense
                 </button>
@@ -31,6 +31,7 @@ const ExpenseOverview = ({ transactions, onAddExpense }) => {
             <div className="mt-10">
                 <CustomLineChart 
                     data = {chartData}
+                    theme = {theme}
                 />
             </div>
         </div>

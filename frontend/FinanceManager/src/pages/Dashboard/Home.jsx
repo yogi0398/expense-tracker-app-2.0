@@ -15,9 +15,12 @@ import Last30DaysExpenses from '../../components/Dashboard/Last30DaysExpenses';
 import RecentIncomeWithChart from '../../components/Dashboard/RecentIncomeWithChart';
 import RecentIncome from '../../components/Dashboard/RecentIncome';
 import Loading from '../../components/layouts/Loading';
-const Home = () => {
+const Home = ({theme, onToggle}) => {
 
   useUserAuth();
+
+  // const theme = "dark";
+  console.log("Inside DashBoard Layout : ", theme)
 
   const navigate = useNavigate();
 
@@ -58,27 +61,30 @@ const Home = () => {
 
 
   return (
-    <DashboardLayout activeMenu="Dashboard">
+    <DashboardLayout activeMenu="Dashboard" theme = {theme} onToggle = {onToggle}>
       {loading ? <Loading /> : (
-        <div className='my-5 mx-auto'>
+        <div className={`my-5 mx-auto `}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <InfoCard
               icon={<IoMdCard />}
               label="Total Balance"
               value={addThousandsSeparator(dashboardData?.totalBalance || 0)}
               color="bg-primary"
+              theme = {theme}
             />
             <InfoCard
               icon={<LuWalletMinimal />}
               label="Total Income"
               value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
               color="bg-orange-500"
+              theme = {theme}
             />
             <InfoCard
               icon={<LuHandCoins />}
               label="Total Expense"
               value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
               color="bg-red-500"
+              theme = {theme}
             />
           </div>
 
@@ -86,31 +92,37 @@ const Home = () => {
             <RecentTransactions
               transactions={dashboardData?.recentTransactions}
               onSeeMore={() => navigate("/expense")}
+              theme = {theme}
             />
 
             <FinanceOverview
               totalBalance={dashboardData?.totalBalance || 0}
               totalIncome={dashboardData?.totalIncome || 0}
               totalExpense={dashboardData?.totalExpenses || 0}
+              theme = {theme}
             />
 
             <ExpenseTransactions
               transactions={dashboardData?.last30DaysExpenses?.transactions || []}
               onSeeMore={() => navigate("/expense")}
+              theme = {theme}
             />
 
             <Last30DaysExpenses
               data={dashboardData?.last30DaysExpenses?.transactions || []}
+              theme = {theme}
             />
 
             <RecentIncomeWithChart
               data={dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []}
               totalIncome={dashboardData?.totalIncome || 0}
+              theme = {theme}
             />
 
             <RecentIncome
               transactions={dashboardData?.last60DaysIncome?.transactions || []}
               onSeeMore={() => navigate("/income")}
+              theme = {theme}
             />
 
             {/* {!loading && (<Loading />)} */}

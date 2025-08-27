@@ -20,7 +20,6 @@ export const useUserAuth = () => {
 
                 if(isMounted && response.data){
                     updateUser(response.data);
-                    console.log(response.data);
                 }
             }
             catch(error){

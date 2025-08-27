@@ -3,11 +3,11 @@ import React from 'react'
 import homeImage from '../../assets/images/homeimage.png'
 import {LuTrendingUpDown} from 'react-icons/lu'
 
-const AuthLayout = ({children}) => {
+const AuthLayout = ({children, theme}) => {
   return (
     <div className='flex'>
-        <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'>
-            <h2>Expense Tracker</h2>
+        <div className={`w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12 ${theme === "dark" ? "bg-black" : "bg-white"}`}>
+            <h2 className={`${theme === "dark" ? "text-white" : "text-black"}`}>Expense Tracker</h2>
             {children}
         </div>
         <div className="hidden md:block w-[40vw] h-screen bg-purple-200 bg-auth-bg-img bg-cover bg-no-repeat bg-center overflow-hidden p-8 relative">

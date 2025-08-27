@@ -7,13 +7,15 @@ import axiosInstance from '../../Utils/axiosInstance';
 import { API_PATHS } from '../../Utils/apiPaths';
 import { UserContext } from '../../context/userContext';
 
-const Login = () => {
+const Login = ({theme}) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   
   const {updateUser} = useContext(UserContext);
+
+  // const theme = "dark";
 
   const navigate = useNavigate();
 
@@ -60,10 +62,10 @@ const Login = () => {
   }
 
   return (
-    <AuthLayout>
+    <AuthLayout theme={theme}>
       <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center'>
-        <h3 className='text-xl font-semibold text-black'>Welcome Back</h3>
-        <p className='text-xs text-slate-500 mt-[5px] mb-6'>Please enter your details to log in</p>
+        <h3 className={`text-xl font-semibold  ${theme === "dark" ? "text-white" : "text-black"}`}>Welcome Back</h3>
+        <p className={`text-xs mt-[5px] mb-6 ${theme === "dark" ? "text-gray-200" : "text-slate-500"}`}>Please enter your details to log in</p>
 
         <form onSubmit={handleLogin}>
           <Input
@@ -72,6 +74,7 @@ const Login = () => {
             label="Email Address"
             placeholder="john@example.com"
             type="email"
+            theme = {theme}
           />
 
           <Input
@@ -80,13 +83,14 @@ const Login = () => {
             label="Password"
             placeholder="Minimum 8 Characters"
             type="password"
+            theme = {theme}
           />
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-          <button type="submit" className='btn-primary'>LOGIN</button>
+          <button type="submit" className={`${theme === "dark" ? "btn-primary-dark" : "btn-primary"}`}>LOGIN</button>
 
-          <p className='text-[13px] text-slate-800 mt-3'>
+          <p className={`text-[13px] mt-3 ${theme === "dark" ? "text-slate-300" : "text-slate-800"}`}>
             Don't have an account?{" "}
             <Link className="font-medium text-primary underline" to="/signup">
               SignUp

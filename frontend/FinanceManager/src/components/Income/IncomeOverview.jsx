@@ -3,7 +3,7 @@ import { prepareIncomeBarChartData } from '../../Utils/helper';
 import { LuPlus } from 'react-icons/lu';
 import CustomBarChart from '../Charts/CustomBarChart';
 
-const IncomeOverview = ({ transactions, onAddIncome }) => {
+const IncomeOverview = ({ transactions, onAddIncome, theme}) => {
 
     const [chartData, setChartData] = useState([]);
 
@@ -15,14 +15,14 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
     }, [transactions]);
 
     return (
-        <div className='card'>
+        <div className={`${theme == "dark" ? "card-dark" : "card"}`}>
             <div className="flex items-center justify-between">
                 <div className="">
-                    <h5 className="text-lg">Income Overview</h5>
+                    <h5 className={`text-lg ${theme == "dark" ? "text-white" : ""}`}>Income Overview</h5>
                     <p className="text-xs text-gray-400 mt-0.5">Track your earnings over time and analyze your income trends.</p>
                 </div>
 
-                <button className="add-btn" onClick={onAddIncome}>
+                <button className={`${theme === "dark" ? "add-btn-dark" : "add-btn"}`} onClick={onAddIncome}>
                     <LuPlus className='text-lg' />
                     Add Income
                 </button>
@@ -31,6 +31,7 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
             <div className="mt-10 ">
                 <CustomBarChart
                     data={chartData}
+                    theme={theme}
                 />
             </div>
         </div>

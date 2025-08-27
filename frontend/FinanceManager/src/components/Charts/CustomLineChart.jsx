@@ -9,7 +9,7 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-const CustomLineChart = ({ data }) => {
+const CustomLineChart = ({ data, theme}) => {
 
     
 
@@ -31,7 +31,7 @@ const CustomLineChart = ({ data }) => {
     };
 
     return (
-        <div className='bg-white mt-6'>
+        <div className={`${theme === "dark" ? "bg-black" : "bg-white"} mt-6`}>
             <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={data}>
                     <defs>
@@ -42,8 +42,8 @@ const CustomLineChart = ({ data }) => {
                     </defs>
 
                     <CartesianGrid stroke='none' />
-                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: "#555" }} stroke='none' />
-                    <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+                    <XAxis dataKey="month" tick={{ fontSize: 12, fill: `${theme === "dark" ? "#aaa" : "#555"}` }} stroke='none' />
+                    <YAxis tick={{ fontSize: 12, fill: `${theme === "dark" ? "#aaa" : "#555"}` }} stroke="none" />
                     <Tooltip content={<CustomToolTip />} />
 
                     <Area type="monotone" dataKey="amount" stroke='#875cf5' fill="url(#incomeGradient)" strokeWidth={3} dot={{ r: 3, fill: "#ab8df8" }} />

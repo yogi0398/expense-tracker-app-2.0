@@ -3,7 +3,7 @@ import EmojiPicker from "emoji-picker-react"
 import { LuImage, LuX } from 'react-icons/lu';
 // import {LuImage, Lux} from "react-icons/lu"
 
-const EmojiPickerPopup = ({icon, onSelect}) => {
+const EmojiPickerPopup = ({icon, onSelect, theme}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -18,7 +18,7 @@ const EmojiPickerPopup = ({icon, onSelect}) => {
                 )}
             </div>
 
-            <p className="dark:text-white">{icon ? "Change Icon" : "Pick Icon"}</p>
+            <p className={`${theme === "dark" ? "text-white" : "text-black"}`}>{icon ? "Change Icon" : "Pick Icon"}</p>
         </div>
 
         {isOpen && (
